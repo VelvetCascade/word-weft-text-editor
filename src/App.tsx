@@ -14,7 +14,7 @@ import { createExtensions } from '@/components/minimal-tiptap/hooks/use-minimal-
 
 export default function App() {
   return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex">
         <div className="w-full">
           <RichTextEditor/>
         </div>
