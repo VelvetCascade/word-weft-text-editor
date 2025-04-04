@@ -14,24 +14,20 @@ import { createExtensions } from '@/components/minimal-tiptap/hooks/use-minimal-
 
 export default function App() {
   return (
-    <div className="px-4 py-12 sm:py-24">
-      <main className="mx-auto w-full max-w-4xl">
-        <Hero />
-        <div className="mt-12 flex flex-col gap-12 sm:mt-20">
-          {/*<BentoMinimalTiptap />*/}
-           <RichTextEditor />
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-full">
+          <RichTextEditor/>
         </div>
-      </main>
-    </div>
+      </div>
   )
 }
 
 const formSchema = z.object({
   description: z
-    .string({
-      required_error: 'Description is required'
-    })
-    .min(1, 'Description is required')
+      .string({
+        required_error: 'Description is required'
+      })
+      .min(1, 'Description is required')
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -109,7 +105,7 @@ export const RichTextEditor: React.FC = () => {
                   onCreate={handleCreate}
                   autofocus={true}
                   immediatelyRender={true}
-                  editable={false}
+                  editable={true}
                   injectCSS={false}
                   editorClassName="focus:outline-none p-5"
                 />

@@ -63,19 +63,28 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
     }
 
     return (
-      <MeasuredContainer
-        as="div"
-        name="editor"
-        ref={ref}
-        className={cn(
-          'flex h-auto min-h-72 w-full flex-col rounded-md border border-input shadow-sm focus-within:border-primary',
-          className
-        )}
-      >
-        <Toolbar editor={editor} />
-        <EditorContent editor={editor} className={cn('minimal-tiptap-editor', editorContentClassName)} />
-        <LinkBubbleMenu editor={editor} />
-      </MeasuredContainer>
+        <MeasuredContainer
+            as="div"
+            name="editor"
+            ref={ref}
+            className={cn(
+                'relative flex w-full flex-col rounded-md shadow-sm focus-within:border-primary',
+                className
+            )}
+        >
+            {/* Toolbar: Stays Fixed */}
+            <div className="sticky top-0 z-10 bg-white">
+                <Toolbar editor={editor} />
+            </div>
+
+            {/* Editor Content: Becomes Scrollable */}
+            <div className="flex-1 overflow-y-auto p-4">
+                <EditorContent editor={editor} className={cn('minimal-tiptap-editor', editorContentClassName)} />
+            </div>
+
+            {/* Bubble Menu (Optional) */}
+            <LinkBubbleMenu editor={editor} />
+        </MeasuredContainer>
     )
   }
 )
