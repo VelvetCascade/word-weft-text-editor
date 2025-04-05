@@ -13,13 +13,13 @@ import { StarterKit } from '@tiptap/starter-kit'
 import { createExtensions } from '@/components/minimal-tiptap/hooks/use-minimal-tiptap.ts'
 
 export default function App() {
-  return (
-      <div className="min-h-screen flex">
-        <div className="w-full">
-          <RichTextEditor/>
+    return (
+        <div className="h-screen flex flex-col">
+            <div className="flex-1 flex flex-col">
+                <RichTextEditor/>
+            </div>
         </div>
-      </div>
-  )
+    )
 }
 
 const formSchema = z.object({
@@ -84,40 +84,42 @@ export const RichTextEditor: React.FC = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="sr-only">Description</FormLabel>
-              <FormControl>
-                <MinimalTiptapEditor
-                  {...field}
-                  throttleDelay={0}
-                  className={cn('w-full', {
-                    'border-destructive focus-within:border-destructive': form.formState.errors.description
-                  })}
-                  editorContentClassName="some-class"
-                  output="html"
-                  placeholder="Type your description here..."
-                  onCreate={handleCreate}
-                  autofocus={true}
-                  immediatelyRender={true}
-                  editable={true}
-                  injectCSS={false}
-                  editorClassName="focus:outline-none p-5"
+      <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-screen w-full">
+                <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                        <FormItem className="flex-1 flex flex-col">
+                            <FormLabel className="sr-only">Description</FormLabel>
+                            <FormControl>
+                                <MinimalTiptapEditor
+                                    {...field}
+                                    throttleDelay={0}
+                                    className={cn('flex-1 flex flex-col h-full', {
+                                        'border-destructive focus-within:border-destructive': form.formState.errors.description
+                                    })}
+                                    editorContentClassName="flex-1"
+                                    output="html"
+                                    placeholder="Type your description here..."
+                                    onCreate={handleCreate}
+                                    autofocus={true}
+                                    immediatelyRender={true}
+                                    editable={true}
+                                    injectCSS={false}
+                                    editorClassName="focus:outline-none p-5 flex-1"
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" size="lg" className="w-full">
-          Submit
-        </Button>
-      </form>
-    </Form>
-  )
+                <div className="p-4 border-t">
+                    <Button type="submit" size="lg" className="w-full">
+                        Submit
+                    </Button>
+                </div>
+            </form>
+        </Form>
+    )
 }
