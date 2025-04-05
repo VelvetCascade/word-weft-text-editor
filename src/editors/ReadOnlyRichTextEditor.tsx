@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {MinimalTiptapEditor} from "@/components/minimal-tiptap";
+import {Editor} from "@tiptap/react";
 
 export const ReaderRichTextEditor: React.FC = () => {
+
+    const editorRef = useRef<Editor | null>(null)
     // State to store the content received from Wix
-    const [content, setContent] = useState({
+    const [content] = useState({
         "type": "doc",
         "content": [
             {
@@ -18,14 +21,30 @@ export const ReaderRichTextEditor: React.FC = () => {
         ]
     });
 
+    const handleCreate = useCallback(
+        ({editor}: { editor: Editor }) => {
+            if (editor.isEmpty) {
+                editor.commands.setContent(content)
+            }
+            editorRef.current = editor
+        },
+        []
+    )
+
     // Set up event listener for messages from Wix when component mounts
     useEffect(() => {
         const handleMessage = (event) => {
+            const trustedOrigins = ['http://localhost:5173', 'https://wordweft.wixstudio.com'];
+
+            if (!trustedOrigins.includes(event.origin)) {
+                console.warn(`Rejected message from untrusted origin: ${event.origin}`);
+                return;
+            }
+
             if (event.data) {
                 // Update content state with data received from Wix
-                setContent(event.data);
+                editorRef.current?.commands.setContent(event.data);
                 console.log("Received content from Wix:", event.data);
-                console.log(event.data);
             }
         };
 
@@ -46,7 +65,7 @@ export const ReaderRichTextEditor: React.FC = () => {
             content={content}
             output="html"
             placeholder="Type your description here..."
-            // onCreate={handleCreate}
+            onCreate={handleCreate}
             autofocus={true}
             immediatelyRender={true}
             editable={false}
