@@ -38,6 +38,7 @@ export const ReaderRichTextEditor: React.FC = () => {
                 console.log("Content Successfully set");
             }
             editorRef.current = editor
+            window.parent.postMessage(editorRef.current.getHTML(), "https://wordweft.wixstudio.com/");
         },
         []
     )
