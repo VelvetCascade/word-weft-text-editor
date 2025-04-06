@@ -20,7 +20,7 @@ const formatActions: TextStyle[] = [
   {
     label: 'Normal Text',
     element: 'span',
-    className: 'grow',
+    className: 'grow ',
     shortcuts: ['mod', 'alt', '0']
   },
   {
@@ -41,28 +41,28 @@ const formatActions: TextStyle[] = [
     label: 'Heading 3',
     element: 'h3',
     level: 3,
-    className: 'm-0 grow text-lg font-semibold',
+    className: 'm-0 grow text-lg font-semibold ',
     shortcuts: ['mod', 'alt', '3']
   },
   {
     label: 'Heading 4',
     element: 'h4',
     level: 4,
-    className: 'm-0 grow text-base font-semibold',
+    className: 'm-0 grow text-base font-semibold ',
     shortcuts: ['mod', 'alt', '4']
   },
   {
     label: 'Heading 5',
     element: 'h5',
     level: 5,
-    className: 'm-0 grow text-sm font-normal',
+    className: 'm-0 grow text-sm font-normal ',
     shortcuts: ['mod', 'alt', '5']
   },
   {
     label: 'Heading 6',
     element: 'h6',
     level: 6,
-    className: 'm-0 grow text-sm font-normal',
+    className: 'm-0 grow text-sm font-normal ',
     shortcuts: ['mod', 'alt', '6']
   }
 ]
@@ -115,7 +115,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
             tooltip="Text styles"
             aria-label="Text styles"
             pressed={editor.isActive('heading')}
-            className="w-12"
+            className="w-12 toolbar-text-icon-color"
             disabled={editor.isActive('codeBlock')}
             size={size}
             variant={variant}

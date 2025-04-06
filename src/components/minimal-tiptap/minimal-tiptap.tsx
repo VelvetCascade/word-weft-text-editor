@@ -76,7 +76,7 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                 )}
             >
                 {/* Toolbar: Stays Fixed */}
-                {editable && <div className="sticky top-0 z-10 bg-white">
+                {editable && <div className="sticky top-0 z-10 bg-[#3D1F0E]">
                     <Toolbar editor={editor} />
                 </div>}
 
