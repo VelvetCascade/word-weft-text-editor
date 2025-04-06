@@ -51,12 +51,15 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 )
 
 export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTiptapProps>(
-  ({ value, onChange, className, editorContentClassName, ...props }, ref) => {
+  ({ value, onChange, className, editorContentClassName, content, ...props }, ref) => {
     const editor = useMinimalTiptapEditor({
       value,
       onUpdate: onChange,
+        content: content,
       ...props
     })
+
+      const { editable} = props;
 
     if (!editor) {
       return null
@@ -73,9 +76,9 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                 )}
             >
                 {/* Toolbar: Stays Fixed */}
-                <div className="sticky top-0 z-10 bg-white">
+                {editable && <div className="sticky top-0 z-10 bg-white">
                     <Toolbar editor={editor} />
-                </div>
+                </div>}
 
                 {/* Editor Content: Becomes Scrollable and fills available space */}
                 <div className="flex-1 overflow-y-auto">

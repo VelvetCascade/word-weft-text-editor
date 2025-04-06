@@ -168,6 +168,7 @@ export const useMinimalTiptapEditor = ({
   throttleDelay = 0,
   onUpdate,
   onBlur,
+    content,
   ...props
 }: UseMinimalTiptapEditorProps) => {
   const throttledSetValue = useThrottle((value: Content) => onUpdate?.(value), throttleDelay)
@@ -198,6 +199,7 @@ export const useMinimalTiptapEditor = ({
         class: cn('focus:outline-none', editorClassName)
       }
     },
+    content: content,
     onUpdate: ({ editor }) => handleUpdate(editor),
     onCreate: ({ editor }) => handleCreate(editor),
     onBlur: ({ editor }) => handleBlur(editor),
