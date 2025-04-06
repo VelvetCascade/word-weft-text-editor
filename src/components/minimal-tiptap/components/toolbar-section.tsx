@@ -27,7 +27,7 @@ export const ToolbarSection: React.FC<ToolbarSectionProps> = ({
   mainActionCount = 0,
   dropdownIcon,
   dropdownTooltip = 'More options',
-  dropdownClassName = 'w-12',
+  dropdownClassName = 'w-12 toolbar-text-icon-color',
   size,
   variant
 }) => {
