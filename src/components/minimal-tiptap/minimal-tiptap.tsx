@@ -74,6 +74,7 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                     'relative flex flex-col w-full h-full rounded-md shadow-sm focus-within:border-primary',
                     className
                 )}
+                style={{ margin: 0, padding: 0 }}
             >
                 {/* Toolbar: Stays Fixed */}
                 {editable && <div className="sticky top-0 z-10 bg-[#3D1F0E]">
