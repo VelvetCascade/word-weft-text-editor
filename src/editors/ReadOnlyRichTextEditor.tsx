@@ -44,6 +44,7 @@ export const ReaderRichTextEditor: React.FC = () => {
             if (event.data) {
                 // Update content state with data received from Wix
                 editorRef.current?.commands.setContent(event.data);
+                console.log(editorRef.current)
                 console.log("Received content from Wix:", event.data);
             }
         };
