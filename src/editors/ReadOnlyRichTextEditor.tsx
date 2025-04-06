@@ -6,8 +6,6 @@ export const ReaderRichTextEditor: React.FC = () => {
 
     const editorRef = useRef<Editor | null>(null)
 
-    const messageQueue = useRef<any[]>([]);
-
     // State to store the content received from Wix
     const [content] = useState({
         "type": "doc",
@@ -26,19 +24,15 @@ export const ReaderRichTextEditor: React.FC = () => {
 
     const handleCreate = useCallback(
         ({editor}: { editor: Editor }) => {
-            if (editor.isEmpty && messageQueue.current.length == 0) {
-                console.log("Editor Is empty and no queue data present");
+            editorRef.current = editor
+            if (editor.isEmpty) {
+                console.log("Editor Is empty");
                 editor.commands.setContent(content)
                 console.log("Default Content Successfully set");
             }
-            else if(editor.isEmpty){
-                const queuedData = messageQueue.current.shift();
-                console.log("Editor Is empty but queue data present", queuedData);
-                editor.commands.setContent(queuedData);
-                console.log("Content Successfully set");
-            }
-            editorRef.current = editor
-            window.parent.postMessage(editorRef.current.getHTML(), "https://wordweft.wixstudio.com/");
+            console.log("Pinging Wix Studio for Content");
+            window.parent.postMessage("Editor:Ready:Ping", "https://wordweft.wixstudio.com/");
+            console.log("Pinged Wix Studio for Content");
         },
         []
     )
@@ -60,14 +54,8 @@ export const ReaderRichTextEditor: React.FC = () => {
 
             if (event.data) {
                 // Update content state with data received from Wix
-                if(editorRef.current){
-                    console.log("Updating editor with data: ", event.data);
-                    editorRef.current.commands.setContent(event.data);
-                }
-                else{
-                    console.log("Pushing Data to Queue", event.data);
-                    messageQueue.current.push(event.data);
-                }
+                console.log("Updating editor with data: ", event.data);
+                editorRef.current?.commands.setContent(event.data);
             }
         };
 
