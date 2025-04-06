@@ -34,6 +34,8 @@ export const ReaderRichTextEditor: React.FC = () => {
     // Set up event listener for messages from Wix when component mounts
     useEffect(() => {
         const handleMessage = (event) => {
+            console.log("Received some event")
+            console.log(event)
             const trustedOrigins = ['http://localhost:5173', 'https://wordweft.wixstudio.com'];
 
             if (!trustedOrigins.includes(event.origin)) {
