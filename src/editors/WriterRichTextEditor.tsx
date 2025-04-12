@@ -41,7 +41,7 @@ export const WriterRichTextEditor: React.FC = () => {
         console.log('==Getting values from form==')
         console.log(editorRef.current?.getJSON())
         console.log("Posting Message")
-        window.parent.postMessage(editorRef.current?.getJSON(), "https://wordweft.wixstudio.com/");
+        window.parent.postMessage(editorRef.current?.getHTML(), "https://wordweft.wixstudio.com/");
         console.log('Success: Values retrieved from form')
 
         setTimeout(() => {

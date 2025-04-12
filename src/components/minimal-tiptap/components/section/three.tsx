@@ -2,8 +2,7 @@ import * as React from 'react'
 import type { Editor } from '@tiptap/react'
 import type { toggleVariants } from '@/components/ui/toggle'
 import type { VariantProps } from 'class-variance-authority'
-// import { CaretDownIcon, CheckIcon } from '@radix-ui/react-icons'
-import { CheckIcon } from '@radix-ui/react-icons'
+import { CaretDownIcon, CheckIcon } from '@radix-ui/react-icons'
 import { ToolbarButton } from '../toolbar-button'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -27,7 +26,7 @@ const COLORS: ColorPalette[] = [
     label: 'Palette 1',
     inverse: 'hsl(var(--background))',
     colors: [
-      { cssVar: 'black', label: 'Default' },
+      { cssVar: 'hsl(var(--foreground))', label: 'Default' },
       { cssVar: 'var(--mt-accent-bold-blue)', label: 'Bold blue' },
       { cssVar: 'var(--mt-accent-bold-teal)', label: 'Bold teal' },
       { cssVar: 'var(--mt-accent-bold-green)', label: 'Bold green' },
@@ -53,7 +52,7 @@ const COLORS: ColorPalette[] = [
     label: 'Palette 3',
     inverse: 'hsl(var(--foreground))',
     colors: [
-      { cssVar: 'yellow', label: 'Yellow', darkLabel: 'Yellow' },
+      { cssVar: 'hsl(var(--background))', label: 'White', darkLabel: 'Black' },
       { cssVar: 'var(--mt-accent-blue-subtler)', label: 'Blue subtle' },
       { cssVar: 'var(--mt-accent-teal-subtler)', label: 'Teal subtle' },
       { cssVar: 'var(--mt-accent-green-subtler)', label: 'Green subtle' },
@@ -74,26 +73,26 @@ const MemoizedColorButton = React.memo<{
   const label = isDarkMode && color.darkLabel ? color.darkLabel : color.label
 
   return (
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <ToggleGroupItem
-              tabIndex={0}
-              className="relative size-7 rounded-md p-0"
-              value={color.cssVar}
-              aria-label={label}
-              style={{ backgroundColor: color.cssVar }}
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault()
-                onClick(color.cssVar)
-              }}
-          >
-            {isSelected && <CheckIcon className="absolute inset-0 m-auto size-6" style={{ color: inverse }} />}
-          </ToggleGroupItem>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">
-          <p>{label}</p>
-        </TooltipContent>
-      </Tooltip>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <ToggleGroupItem
+          tabIndex={0}
+          className="relative size-7 rounded-md p-0"
+          value={color.cssVar}
+          aria-label={label}
+          style={{ backgroundColor: color.cssVar }}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault()
+            onClick(color.cssVar)
+          }}
+        >
+          {isSelected && <CheckIcon className="absolute inset-0 m-auto size-6" style={{ color: inverse }} />}
+        </ToggleGroupItem>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p>{label}</p>
+      </TooltipContent>
+    </Tooltip>
   )
 })
 
@@ -105,24 +104,24 @@ const MemoizedColorPicker = React.memo<{
   inverse: string
   onColorChange: (value: string) => void
 }>(({ palette, selectedColor, inverse, onColorChange }) => (
-    <ToggleGroup
-        type="single"
-        value={selectedColor}
-        onValueChange={(value: string) => {
-          if (value) onColorChange(value)
-        }}
-        className="gap-1.5"
-    >
-      {palette.colors.map((color, index) => (
-          <MemoizedColorButton
-              key={index}
-              inverse={inverse}
-              color={color}
-              isSelected={selectedColor === color.cssVar}
-              onClick={onColorChange}
-          />
-      ))}
-    </ToggleGroup>
+  <ToggleGroup
+    type="single"
+    value={selectedColor}
+    onValueChange={(value: string) => {
+      if (value) onColorChange(value)
+    }}
+    className="gap-1.5"
+  >
+    {palette.colors.map((color, index) => (
+      <MemoizedColorButton
+        key={index}
+        inverse={inverse}
+        color={color}
+        isSelected={selectedColor === color.cssVar}
+        onClick={onColorChange}
+      />
+    ))}
+  </ToggleGroup>
 ))
 
 MemoizedColorPicker.displayName = 'MemoizedColorPicker'
@@ -136,68 +135,55 @@ export const SectionThree: React.FC<SectionThreeProps> = ({ editor, size, varian
   const [selectedColor, setSelectedColor] = React.useState(color)
 
   const handleColorChange = React.useCallback(
-      (value: string) => {
-        setSelectedColor(value)
-        editor.chain().setColor(value).run()
-      },
-      [editor]
+    (value: string) => {
+      setSelectedColor(value)
+      editor.chain().setColor(value).run()
+    },
+    [editor]
   )
 
   React.useEffect(() => {
     setSelectedColor(color)
   }, [color])
 
-  // Find the color label for the tooltip
-  const getColorLabel = React.useMemo(() => {
-    for (const palette of COLORS) {
-      for (const color of palette.colors) {
-        if (color.cssVar === selectedColor) {
-          return color.label
-        }
-      }
-    }
-    return "Current color"
-  }, [selectedColor])
-
   return (
-      <Popover>
-        <PopoverTrigger asChild>
-          <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-12" size={size} variant={variant}>
-            <div className="flex items-center gap-1">
-              {/* Color display box with A symbol */}
-              <Tooltip>
-                <TooltipTrigger>
-                  <div
-                      className="flex items-center justify-center size-6 rounded border border-gray-300"
-                      aria-label={`Current color: ${getColorLabel}`}
-                      style={{backgroundColor: "#EED7BF"}}
-                  >
-                    <span className="text-xl font-medium" style={{ color: selectedColor }}>A</span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>{getColorLabel}</p>
-                </TooltipContent>
-              </Tooltip>
-
-              {/*<CaretDownIcon className="size-5" />*/}
-            </div>
-          </ToolbarButton>
-        </PopoverTrigger>
-        <PopoverContent align="start" className="w-full">
-          <div className="space-y-1.5">
-            {COLORS.map((palette, index) => (
-                <MemoizedColorPicker
-                    key={index}
-                    palette={palette}
-                    inverse={palette.inverse}
-                    selectedColor={selectedColor}
-                    onColorChange={handleColorChange}
-                />
-            ))}
-          </div>
-        </PopoverContent>
-      </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-12" size={size} variant={variant}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-5"
+            style={{ color: selectedColor }}
+          >
+            <path d="M4 20h16" />
+            <path d="m6 16 6-12 6 12" />
+            <path d="M8 12h8" />
+          </svg>
+          <CaretDownIcon className="size-5" />
+        </ToolbarButton>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-full">
+        <div className="space-y-1.5">
+          {COLORS.map((palette, index) => (
+            <MemoizedColorPicker
+              key={index}
+              palette={palette}
+              inverse={palette.inverse}
+              selectedColor={selectedColor}
+              onColorChange={handleColorChange}
+            />
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   )
 }
 
