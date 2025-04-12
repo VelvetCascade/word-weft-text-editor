@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* WebKit Scrollbars */
+  .scrollbar-transparent::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+    transition: width 0.3s ease;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground));
+    border-radius: 4px;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground) / 0.8);
+    width: 8px;
+  }
+
+  .scrollbar-transparent:hover::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Firefox Scrollbars */
+  .scrollbar-transparent {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--foreground)) transparent;
+  }
+}
+
 @layer base {
   :root {
     --background: 32 40% 92%;
@@ -60,6 +93,13 @@
     --chart-5: 0 100% 50%;
     --toolbar-icon-text: 32 40% 92%;
   }
+
+  /* Scrollbar behavior */
+  html {
+    @apply scrollbar-transparent;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
 }
 
 @layer base {
@@ -74,4 +114,5 @@
     color: hsl(var(--toolbar-icon-text));
   }
 }
+
 
