@@ -1,14 +1,13 @@
 import * as React from 'react'
-import type { Editor } from '@tiptap/react'
-import type { toggleVariants } from '@/components/ui/toggle'
-import type { VariantProps } from 'class-variance-authority'
-// import { CaretDownIcon, CheckIcon } from '@radix-ui/react-icons'
-import { CheckIcon } from '@radix-ui/react-icons'
-import { ToolbarButton } from '../toolbar-button'
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { useTheme } from '../../hooks/use-theme'
+import type {Editor} from '@tiptap/react'
+import type {toggleVariants} from '@/components/ui/toggle'
+import type {VariantProps} from 'class-variance-authority'
+import {CheckIcon} from '@radix-ui/react-icons'
+import {ToolbarButton} from '../toolbar-button'
+import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
+import {ToggleGroup, ToggleGroupItem} from '@/components/ui/toggle-group'
+import {Tooltip, TooltipContent, TooltipTrigger} from '@/components/ui/tooltip'
+import {useTheme} from '../../hooks/use-theme'
 
 interface ColorItem {
   cssVar: string
@@ -147,57 +146,49 @@ export const SectionThree: React.FC<SectionThreeProps> = ({ editor, size, varian
     setSelectedColor(color)
   }, [color])
 
-  // Find the color label for the tooltip
-  const getColorLabel = React.useMemo(() => {
-    for (const palette of COLORS) {
-      for (const color of palette.colors) {
-        if (color.cssVar === selectedColor) {
-          return color.label
-        }
-      }
-    }
-    return "Current color"
-  }, [selectedColor])
-
   return (
-      <Popover>
-        <PopoverTrigger asChild>
-          <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-12" size={size} variant={variant}>
-            <div className="flex items-center gap-1">
-              {/* Color display box with A symbol */}
-              <Tooltip>
-                <TooltipTrigger>
-                  <div
-                      className="flex items-center justify-center size-6 rounded border border-gray-300"
-                      aria-label={`Current color: ${getColorLabel}`}
-                      style={{backgroundColor: "#EED7BF"}}
-                  >
-                    <span className="text-xl font-medium" style={{ color: selectedColor }}>A</span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>{getColorLabel}</p>
-                </TooltipContent>
-              </Tooltip>
-
-              {/*<CaretDownIcon className="size-5" />*/}
+    <Popover>
+      <PopoverTrigger asChild>
+        <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-12" size={size} variant={variant}>
+          <div
+              className="flex items-center justify-center size-6 rounded border border-gray-300"
+              style={{backgroundColor: "#EED7BF"}}
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-5"
+            style={{ color: selectedColor }}
+          >
+            <path d="M4 20h16" />
+            <path d="m6 16 6-12 6 12" />
+            <path d="M8 12h8" />
+          </svg>
             </div>
-          </ToolbarButton>
-        </PopoverTrigger>
-        <PopoverContent align="start" className="w-full">
-          <div className="space-y-1.5">
-            {COLORS.map((palette, index) => (
-                <MemoizedColorPicker
-                    key={index}
-                    palette={palette}
-                    inverse={palette.inverse}
-                    selectedColor={selectedColor}
-                    onColorChange={handleColorChange}
-                />
-            ))}
-          </div>
-        </PopoverContent>
-      </Popover>
+          {/*<CaretDownIcon className="size-5" />*/}
+        </ToolbarButton>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-full">
+        <div className="space-y-1.5">
+          {COLORS.map((palette, index) => (
+            <MemoizedColorPicker
+              key={index}
+              palette={palette}
+              inverse={palette.inverse}
+              selectedColor={selectedColor}
+              onColorChange={handleColorChange}
+            />
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   )
 }
 
