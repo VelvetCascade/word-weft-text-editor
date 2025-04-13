@@ -6,11 +6,12 @@ import type { VariantProps } from 'class-variance-authority'
 import { CaretDownIcon, CodeIcon, DividerHorizontalIcon, PlusIcon, QuoteIcon } from '@radix-ui/react-icons'
 import {LuSubscript, LuSuperscript} from "react-icons/lu";
 import { LinkEditPopover } from '../link/link-edit-popover'
-import { ImageEditDialog } from '../image/image-edit-dialog'
 import { ToolbarSection } from '../toolbar-section'
 import {TbListDetails} from "react-icons/tb";
+import {CiTextAlignCenter, CiTextAlignJustify, CiTextAlignLeft, CiTextAlignRight} from "react-icons/ci";
+import {IoIosRedo, IoIosUndo} from "react-icons/io";
 
-type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript'
+type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript' | 'ta-left' |'ta-center'|'ta-right' | 'ta-justify' | 'undo'| 'redo'
 interface InsertElement extends FormatAction {
   value: InsertElementAction
 }
@@ -68,6 +69,60 @@ const formatActions: InsertElement[] = [
     action: editor => editor.chain().focus().toggleSuperscript().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().toggleSuperscript().run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'ta-left',
+    label: 'Left Align',
+    icon: <CiTextAlignLeft className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().setTextAlign('left').run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().setTextAlign('left').run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'ta-right',
+    label: 'Right Align',
+    icon: <CiTextAlignRight className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().setTextAlign('right').run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().setTextAlign('right').run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'ta-center',
+    label: 'Center Align',
+    icon: <CiTextAlignCenter className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().setTextAlign('center').run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().setTextAlign('center').run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'ta-justify',
+    label: 'Justify',
+    icon: <CiTextAlignJustify className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().setTextAlign('justify').run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().setTextAlign('justify').run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'undo',
+    label: 'Undo',
+    icon: <IoIosUndo className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().undo().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().undo().run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'redo',
+    label: 'Redo',
+    icon: <IoIosRedo className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().redo().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().redo().run(),
     shortcuts: ['mod', 'alt', '-']
   }
 ]

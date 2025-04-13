@@ -28,6 +28,7 @@ import DetailsSummary from '@tiptap-pro/extension-details-summary';
 import {Subscript} from "@tiptap/extension-subscript";
 import {Superscript} from "@tiptap/extension-superscript";
 import {CharacterCount} from "@tiptap/extension-character-count";
+import {TextAlign} from "@tiptap/extension-text-align";
 
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
   value?: Content
@@ -174,6 +175,9 @@ export const createExtensions = (placeholder: string) => [
   Subscript,
   Superscript,
   CharacterCount,
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
+  }),
   Placeholder.configure({ placeholder: () => placeholder })
 ]
 

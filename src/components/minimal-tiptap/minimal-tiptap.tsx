@@ -22,8 +22,8 @@ export interface MinimalTiptapProps extends Omit<UseMinimalTiptapEditorProps, 'o
   onChange?: (value: Content) => void
   className?: string
   editorContentClassName?: string
-    autoSaveShow: boolean
-    autoSaveOnFinish: () => void
+    autoSaveShow?: boolean
+    autoSaveOnFinish?: () => void
 }
 
 const Toolbar = ({ editor }: { editor: Editor }) => (
@@ -35,7 +35,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <SectionTwo
         editor={editor}
-        activeActions={['bold', 'italic', 'underline', 'strikethrough', 'code', 'clearFormatting']}
+        activeActions={['bold', 'italic', 'underline', 'strikethrough', 'clearFormatting']}
         mainActionCount={6}
       />
 
@@ -49,7 +49,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details', 'superscript', 'subscript']} mainActionCount={10} />
+      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details', 'superscript', 'subscript', 'ta-left' ,'ta-center','ta-right' , 'ta-justify', 'undo', 'redo']} mainActionCount={10} />
     </div>
   </div>
 )
@@ -93,11 +93,8 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                     />
                 </div>
                 {/*/!* Use the new AnimatedPopup component *!/*/}
-                <AnimatedPopup
-                    show={autoSaveShow}
-                    onFinish={autoSaveOnFinish}
-                />
-                <WordCounter editor={editor}/>
+                {editable && <AnimatedPopup show={autoSaveShow} onFinish={autoSaveOnFinish}/>}
+                {editable && <WordCounter editor={editor}/>}
 
             {/* Bubble Menu (Optional) */}
             <LinkBubbleMenu editor={editor} />
