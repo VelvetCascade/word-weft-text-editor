@@ -106,7 +106,7 @@ export const WriterRichTextEditor: React.FC = () => {
                                             })}
                                             editorContentClassName="flex-1"
                                             output="html"
-                                            placeholder="Type your description here..."
+                                            placeholder="From thoughts to threads - Your story starts here..."
                                             onCreate={handleCreate}
                                             autofocus={true}
                                             immediatelyRender={true}
