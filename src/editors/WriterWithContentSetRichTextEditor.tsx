@@ -13,7 +13,7 @@ const formSchema = z.object({
         .string({
             required_error: 'Description is required'
         })
-        .min(1, 'Description is required')
+        .min(0, 'Description is required')
 })
 
 type FormValues = z.infer<typeof formSchema>
