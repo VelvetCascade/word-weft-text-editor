@@ -15,6 +15,7 @@ import { LinkBubbleMenu } from './components/bubble-menu/link-bubble-menu'
 import { useMinimalTiptapEditor } from './hooks/use-minimal-tiptap'
 import { MeasuredContainer } from './components/measured-container'
 import {AnimatedPopup} from "@/components/minimal-tiptap/components/animated-popup.tsx";
+import {WordCounter} from "@/components/ui/wordCounter.tsx";
 
 export interface MinimalTiptapProps extends Omit<UseMinimalTiptapEditorProps, 'onUpdate'> {
   value?: Content
@@ -48,7 +49,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details']} mainActionCount={3} />
+      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details', 'superscript', 'subscript']} mainActionCount={10} />
     </div>
   </div>
 )
@@ -77,11 +78,11 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                     'relative flex flex-col w-full h-full rounded-md shadow-sm focus-within:border-primary',
                     className
                 )}
-                style={{ margin: 0, padding: 0 }}
+                style={{margin: 0, padding: 0}}
             >
                 {/* Toolbar: Stays Fixed */}
                 {editable && <div className="sticky top-0 z-10 bg-[#3D1F0E]">
-                    <Toolbar editor={editor} />
+                    <Toolbar editor={editor}/>
                 </div>}
 
                 {/* Editor Content: Becomes Scrollable and fills available space */}
@@ -96,6 +97,7 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                     show={autoSaveShow}
                     onFinish={autoSaveOnFinish}
                 />
+                <WordCounter editor={editor}/>
 
             {/* Bubble Menu (Optional) */}
             <LinkBubbleMenu editor={editor} />

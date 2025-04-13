@@ -25,6 +25,9 @@ import { toast } from 'sonner'
 import Details from "@tiptap-pro/extension-details";
 import DetailsContent from "@tiptap-pro/extension-details-content";
 import DetailsSummary from '@tiptap-pro/extension-details-summary';
+import {Subscript} from "@tiptap/extension-subscript";
+import {Superscript} from "@tiptap/extension-superscript";
+import {CharacterCount} from "@tiptap/extension-character-count";
 
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
   value?: Content
@@ -168,6 +171,9 @@ export const createExtensions = (placeholder: string) => [
   }),
   DetailsSummary,
   DetailsContent,
+  Subscript,
+  Superscript,
+  CharacterCount,
   Placeholder.configure({ placeholder: () => placeholder })
 ]
 

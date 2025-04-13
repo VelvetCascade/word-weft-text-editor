@@ -8,11 +8,11 @@ import {
   DotsHorizontalIcon,
   FontBoldIcon,
   FontItalicIcon,
-  StrikethroughIcon,
   TextNoneIcon,
   UnderlineIcon
 } from '@radix-ui/react-icons'
 import { ToolbarSection } from '../toolbar-section'
+import {MdStrikethroughS} from "react-icons/md";
 
 type TextStyleAction = 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code' | 'clearFormatting'
 
@@ -51,7 +51,7 @@ const formatActions: TextStyle[] = [
   {
     value: 'strikethrough',
     label: 'Strikethrough',
-    icon: <StrikethroughIcon className="size-5 toolbar-text-icon-color" />,
+    icon: <MdStrikethroughS className="size-5 toolbar-text-icon-color" />,
     action: editor => editor.chain().focus().toggleStrike().run(),
     isActive: editor => editor.isActive('strike'),
     canExecute: editor => editor.can().chain().focus().toggleStrike().run() && !editor.isActive('codeBlock'),

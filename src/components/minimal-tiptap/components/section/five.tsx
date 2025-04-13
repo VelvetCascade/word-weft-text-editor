@@ -4,11 +4,13 @@ import type { FormatAction } from '../../types'
 import type { toggleVariants } from '@/components/ui/toggle'
 import type { VariantProps } from 'class-variance-authority'
 import { CaretDownIcon, CodeIcon, DividerHorizontalIcon, PlusIcon, QuoteIcon } from '@radix-ui/react-icons'
+import {LuSubscript, LuSuperscript} from "react-icons/lu";
 import { LinkEditPopover } from '../link/link-edit-popover'
 import { ImageEditDialog } from '../image/image-edit-dialog'
 import { ToolbarSection } from '../toolbar-section'
+import {TbListDetails} from "react-icons/tb";
 
-type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details'
+type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript'
 interface InsertElement extends FormatAction {
   value: InsertElementAction
 }
@@ -44,10 +46,28 @@ const formatActions: InsertElement[] = [
   {
     value: 'details',
     label: 'Details',
-    icon: <DividerHorizontalIcon className="size-5 toolbar-text-icon-color" />,
+    icon: <TbListDetails className="size-5 toolbar-text-icon-color" />,
     action: editor => editor.chain().focus().setDetails().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().setDetails().run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'subscript',
+    label: 'Subscript',
+    icon: <LuSubscript className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().toggleSubscript().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().toggleSubscript().run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'superscript',
+    label: 'Superscript',
+    icon: <LuSuperscript className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().toggleSuperscript().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().toggleSuperscript().run(),
     shortcuts: ['mod', 'alt', '-']
   }
 ]
@@ -68,7 +88,7 @@ export const SectionFive: React.FC<SectionFiveProps> = ({
   return (
     <>
       <LinkEditPopover editor={editor} size={size} variant={variant} />
-      <ImageEditDialog editor={editor} size={size} variant={variant} />
+      {/*<ImageEditDialog editor={editor} size={size} variant={variant} />*/}
       <ToolbarSection
         editor={editor}
         actions={formatActions}
