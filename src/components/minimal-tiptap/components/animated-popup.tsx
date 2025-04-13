@@ -9,8 +9,8 @@ type PopupConfig = {
 };
 
 interface AnimatedPopupProps {
-    show: boolean;
-    onFinish: () => void;
+    show?: boolean;
+    onFinish?: () => void;
     config?: PopupConfig;
 }
 
@@ -46,7 +46,7 @@ export const AnimatedPopup: React.FC<AnimatedPopupProps> = ({
 
             // Hide popup after specified time
             hidePopupTimeout = window.setTimeout(() => {
-                onFinish();
+                onFinish ? onFinish() : 1500;
             }, mergedConfig.hidePopupTime);
         }
 
