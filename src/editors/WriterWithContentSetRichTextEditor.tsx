@@ -41,7 +41,11 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
         () => {
             if(1 === Math.floor(Math.random() * 30) && editorRef.current != null){
                 console.log("Sending Data to WIX for AutoSave");
-                window.parent.postMessage(editorRef.current?.getJSON(), "https://wordweft.wixstudio.com/");
+                let dataToBeSentToWix = {
+                    eventType : "auto_save",
+                    content : editorRef.current?.getJSON()
+                }
+                window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
 
                 // Show popup
                 setShowPopup(true);
@@ -110,7 +114,11 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
         console.log('==Getting values from form==')
         console.log(editorRef.current?.getJSON())
         console.log("Posting Message")
-        window.parent.postMessage(editorRef.current?.getJSON(), "https://wordweft.wixstudio.com/");
+        let dataToBeSentToWix = {
+            eventType : "final_save",
+            content : editorRef.current?.getJSON()
+        }
+        window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
         console.log('Success: Values retrieved from form')
 
         setTimeout(() => {
