@@ -139,8 +139,6 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
     }
 
     return (
-        <>
-            <div className="relative">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-screen w-full">
                         <FormField
@@ -181,7 +179,5 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
                         </div>
                     </form>
                 </Form>
-            </div>
-        </>
     )
 }
