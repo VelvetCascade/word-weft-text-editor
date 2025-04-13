@@ -28,7 +28,7 @@ const formatActions: ListItem[] = [
   {
     value: 'bulletList',
     label: 'Bullet list',
-    icon: <ListBulletIcon className="size-5" />,
+    icon: <ListBulletIcon className="size-5 toolbar-text-icon-color" />,
     isActive: editor => editor.isActive('bulletList'),
     action: editor => editor.chain().focus().toggleBulletList().run(),
     canExecute: editor => editor.can().chain().focus().toggleBulletList().run(),
