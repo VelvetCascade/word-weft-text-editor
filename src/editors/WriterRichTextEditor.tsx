@@ -37,6 +37,16 @@ export const WriterRichTextEditor: React.FC = () => {
         [form]
     )
 
+    const handleChange = useCallback(
+        () => {
+            if(1 === Math.floor(Math.random() * 30) && editorRef.current !=null){
+                console.log("Sending Data to WIX Fir AutoSave");
+                window.parent.postMessage(editorRef.current?.getJSON(), "https://wordweft.wixstudio.com/");
+            }
+        },
+        []
+    )
+
     const onSubmit = (values: FormValues) => {
         console.log('==Getting values from form==')
         console.log(editorRef.current?.getJSON())
@@ -94,6 +104,7 @@ export const WriterRichTextEditor: React.FC = () => {
                                     editable={true}
                                     injectCSS={false}
                                     editorClassName="focus:outline-none p-5 flex-1"
+                                    onChange={handleChange}
                                     // content={}
                                 />
                             </FormControl>

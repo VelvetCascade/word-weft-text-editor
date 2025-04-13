@@ -32,7 +32,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
       <SectionTwo
         editor={editor}
         activeActions={['bold', 'italic', 'underline', 'strikethrough', 'code', 'clearFormatting']}
-        mainActionCount={3}
+        mainActionCount={6}
       />
 
       <Separator orientation="vertical" className="mx-2 h-7" />
@@ -41,11 +41,11 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFour editor={editor} activeActions={['orderedList', 'bulletList']} mainActionCount={0} />
+      <SectionFour editor={editor} activeActions={['orderedList', 'bulletList']} mainActionCount={2} />
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule']} mainActionCount={0} />
+      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule']} mainActionCount={3} />
     </div>
   </div>
 )

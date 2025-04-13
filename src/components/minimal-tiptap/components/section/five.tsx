@@ -17,7 +17,7 @@ const formatActions: InsertElement[] = [
   {
     value: 'codeBlock',
     label: 'Code block',
-    icon: <CodeIcon className="size-5" />,
+    icon: <CodeIcon className="size-5 toolbar-text-icon-color" />,
     action: editor => editor.chain().focus().toggleCodeBlock().run(),
     isActive: editor => editor.isActive('codeBlock'),
     canExecute: editor => editor.can().chain().focus().toggleCodeBlock().run(),
@@ -26,7 +26,7 @@ const formatActions: InsertElement[] = [
   {
     value: 'blockquote',
     label: 'Blockquote',
-    icon: <QuoteIcon className="size-5" />,
+    icon: <QuoteIcon className="size-5 toolbar-text-icon-color" />,
     action: editor => editor.chain().focus().toggleBlockquote().run(),
     isActive: editor => editor.isActive('blockquote'),
     canExecute: editor => editor.can().chain().focus().toggleBlockquote().run(),
@@ -35,7 +35,7 @@ const formatActions: InsertElement[] = [
   {
     value: 'horizontalRule',
     label: 'Divider',
-    icon: <DividerHorizontalIcon className="size-5" />,
+    icon: <DividerHorizontalIcon className="size-5 toolbar-text-icon-color" />,
     action: editor => editor.chain().focus().setHorizontalRule().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().setHorizontalRule().run(),
