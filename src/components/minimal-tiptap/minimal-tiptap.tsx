@@ -45,7 +45,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule']} mainActionCount={3} />
+      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details']} mainActionCount={3} />
     </div>
   </div>
 )

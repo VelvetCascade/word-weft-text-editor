@@ -22,6 +22,9 @@ import { cn } from '@/lib/utils'
 import { fileToBase64, getOutput, randomId } from '../utils'
 import { useThrottle } from '../hooks/use-throttle'
 import { toast } from 'sonner'
+import Details from "@tiptap-pro/extension-details";
+import DetailsContent from "@tiptap-pro/extension-details-content";
+import DetailsSummary from '@tiptap-pro/extension-details-summary';
 
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
   value?: Content
@@ -157,6 +160,14 @@ export const createExtensions = (placeholder: string) => [
   HorizontalRule,
   ResetMarksOnEnter,
   CodeBlockLowlight,
+  Details.configure({
+    persist: true,
+    HTMLAttributes: {
+      class: 'details',
+    },
+  }),
+  DetailsSummary,
+  DetailsContent,
   Placeholder.configure({ placeholder: () => placeholder })
 ]
 
