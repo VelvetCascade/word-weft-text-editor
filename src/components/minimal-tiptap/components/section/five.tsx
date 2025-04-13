@@ -8,7 +8,7 @@ import { LinkEditPopover } from '../link/link-edit-popover'
 import { ImageEditDialog } from '../image/image-edit-dialog'
 import { ToolbarSection } from '../toolbar-section'
 
-type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule'
+type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details'
 interface InsertElement extends FormatAction {
   value: InsertElementAction
 }
@@ -39,6 +39,15 @@ const formatActions: InsertElement[] = [
     action: editor => editor.chain().focus().setHorizontalRule().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().setHorizontalRule().run(),
+    shortcuts: ['mod', 'alt', '-']
+  },
+  {
+    value: 'details',
+    label: 'Details',
+    icon: <DividerHorizontalIcon className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().setDetails().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().setDetails().run(),
     shortcuts: ['mod', 'alt', '-']
   }
 ]
