@@ -14,12 +14,15 @@ import { SectionFive } from './components/section/five'
 import { LinkBubbleMenu } from './components/bubble-menu/link-bubble-menu'
 import { useMinimalTiptapEditor } from './hooks/use-minimal-tiptap'
 import { MeasuredContainer } from './components/measured-container'
+import {AnimatedPopup} from "@/components/minimal-tiptap/components/animated-popup.tsx";
 
 export interface MinimalTiptapProps extends Omit<UseMinimalTiptapEditorProps, 'onUpdate'> {
   value?: Content
   onChange?: (value: Content) => void
   className?: string
   editorContentClassName?: string
+    autoSaveShow: boolean
+    autoSaveOnFinish: () => void
 }
 
 const Toolbar = ({ editor }: { editor: Editor }) => (
@@ -51,7 +54,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 )
 
 export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTiptapProps>(
-  ({ value, onChange, className, editorContentClassName, content, ...props }, ref) => {
+  ({ value, onChange, className, editorContentClassName, content, autoSaveShow, autoSaveOnFinish, ...props }, ref) => {
     const editor = useMinimalTiptapEditor({
       value,
       onUpdate: onChange,
@@ -88,6 +91,11 @@ export const MinimalTiptapEditor = React.forwardRef<HTMLDivElement, MinimalTipta
                         className={cn('minimal-tiptap-editor h-full', editorContentClassName)}
                     />
                 </div>
+                {/*/!* Use the new AnimatedPopup component *!/*/}
+                <AnimatedPopup
+                    show={autoSaveShow}
+                    onFinish={autoSaveOnFinish}
+                />
 
             {/* Bubble Menu (Optional) */}
             <LinkBubbleMenu editor={editor} />
