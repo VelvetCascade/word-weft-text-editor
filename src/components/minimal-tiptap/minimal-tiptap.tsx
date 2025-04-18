@@ -39,9 +39,9 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
         mainActionCount={6}
       />
 
-      <Separator orientation="vertical" className="mx-2 h-7" />
+      {/*<Separator orientation="vertical" className="mx-2 h-7" />*/}
 
-      <SectionThree editor={editor} />
+      {/*<SectionThree editor={editor} />*/}
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 

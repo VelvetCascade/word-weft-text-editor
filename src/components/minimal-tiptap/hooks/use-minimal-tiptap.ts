@@ -7,6 +7,7 @@ import { Typography } from '@tiptap/extension-typography'
 import { Placeholder } from '@tiptap/extension-placeholder'
 import { Underline } from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
+import { FontFamily } from '@tiptap/extension-font-family'
 import {
   Link,
   Image,
@@ -177,6 +178,9 @@ export const createExtensions = (placeholder: string) => [
   CharacterCount,
   TextAlign.configure({
     types: ['heading', 'paragraph'],
+  }),
+  FontFamily.configure({
+    types: ['textStyle']
   }),
   Placeholder.configure({ placeholder: () => placeholder })
 ]
