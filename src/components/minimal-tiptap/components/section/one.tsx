@@ -242,7 +242,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       [activeLevels]
     )
 
-    // Text style handling
+
     const handleStyleChange = React.useCallback(
       (level?: Level) => {
         if (level) {
@@ -254,7 +254,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       [editor]
     )
 
-    // Font family handling
+
     const handleFontFamilyChange = React.useCallback(
       (fontFamily: string) => {
         editor.chain().focus().setFontFamily(fontFamily).run()
@@ -263,7 +263,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       [editor]
     )
 
-    // Color handling
+
     const handleColorChange = React.useCallback(
       (value: string) => {
         setSelectedColor(value)
@@ -271,13 +271,6 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       },
       [editor]
     )
-
-    // React.useEffect(() => {
-    //     // Set default font family when component mounts
-    //     if (editor && editor.isEditable) {
-    //         handleFontFamilyChange(fontFamilyActions[0].fontFamily)
-    //     }
-    // }, [editor, handleFontFamilyChange])
 
     React.useEffect(() => {
       setSelectedColor(color)
@@ -290,7 +283,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       [editor]
     )
 
-    // Get current text style
+
     const getCurrentTextStyle = React.useCallback(() => {
       for (const level of activeLevels) {
         if (editor.isActive('heading', { level })) {
@@ -303,14 +296,13 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
       return formatActions[0]
     }, [editor, activeLevels])
 
-    // Get current font family
+
     const getCurrentFontFamily = React.useCallback(() => {
       for (const style of fontFamilyActions) {
         if (isFontFamilyActive(style.fontFamily)) {
           return style
         }
       }
-      // Return the first item as default, but don't apply it automatically
       return fontFamilyActions[0]
     }, [isFontFamilyActive])
 
