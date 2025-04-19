@@ -51,6 +51,7 @@ export const WriterRichTextEditor: React.FC = () => {
                     },
                     content : editorRef.current?.getJSON()
                 }
+                console.log(dataToBeSentToWix)
                 window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
 
                 // Show popup
@@ -66,7 +67,7 @@ export const WriterRichTextEditor: React.FC = () => {
 
     const onSubmit = (values: FormValues) => {
         console.log('==Getting values from form==')
-        console.log(editorRef.current?.getJSON())
+
         console.log("Posting Message")
         let dataToBeSentToWix = {
             eventType : "final_save",
@@ -76,6 +77,7 @@ export const WriterRichTextEditor: React.FC = () => {
             },
             content : editorRef.current?.getJSON()
         }
+        console.log(dataToBeSentToWix)
         window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
         console.log('Success: Values retrieved from form')
 
