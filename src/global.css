@@ -175,4 +175,13 @@ summary {
   list-style: none !important;
 }
 
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+}
+
+html {
+  --title-font-family: 'Helvetica', sans-serif;
+}
 
