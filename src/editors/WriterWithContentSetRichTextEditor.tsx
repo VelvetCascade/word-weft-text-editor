@@ -20,6 +20,8 @@ type FormValues = z.infer<typeof formSchema>
 
 export const WriterWithContentSetRichTextEditor: React.FC = () => {
     const editorRef = useRef<Editor | null>(null)
+    const [lastSaveTime, setLastSaveTime] = useState(Date.now())
+    let AUTO_SAVE_INTERVAL = 60000
     const [showPopup, setShowPopup] = useState(false);
 
     const [content] = useState({
@@ -37,27 +39,55 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
         ]
     });
 
-    const handleChange = useCallback(
-        () => {
-            if(1 === Math.floor(Math.random() * 30) && editorRef.current != null){
-                console.log("Sending Data to WIX for AutoSave");
-                let dataToBeSentToWix = {
-                    eventType : "auto_save",
-                    stats: {
-                        characterCount: editorRef.current.storage.characterCount.characters(),
-                        wordCount: editorRef.current.storage.characterCount.words()
-                    },
-                    content : editorRef.current?.getJSON()
-                }
-                console.log(dataToBeSentToWix)
-                window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
+    // const handleChange = useCallback(
+    //     () => {
+    //         if(1 === Math.floor(Math.random() * 30) && editorRef.current != null){
+    //             console.log("Sending Data to WIX for AutoSave");
+    //             let dataToBeSentToWix = {
+    //                 eventType : "auto_save",
+    //                 stats: {
+    //                     characterCount: editorRef.current.storage.characterCount.characters(),
+    //                     wordCount: editorRef.current.storage.characterCount.words()
+    //                 },
+    //                 content : editorRef.current?.getJSON()
+    //             }
+    //             console.log(dataToBeSentToWix)
+    //             window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
+    //
+    //             // Show popup
+    //             setShowPopup(true);
+    //         }
+    //     },
+    //     [setShowPopup]
+    // )
 
-                // Show popup
-                setShowPopup(true);
+    const handleChange = useCallback(() => {
+        const currentTime = Date.now()
+
+        // Check if enough time has passed since the last save
+        if (AUTO_SAVE_INTERVAL == null){
+            AUTO_SAVE_INTERVAL = 60000
+        }
+        if (currentTime - lastSaveTime >= AUTO_SAVE_INTERVAL && editorRef.current != null) {
+            console.log('Sending Data to WIX Fir AutoSave')
+            let dataToBeSentToWix = {
+                eventType: 'auto_save',
+                stats: {
+                    characterCount: editorRef.current.storage.characterCount.characters(),
+                    wordCount: editorRef.current.storage.characterCount.words()
+                },
+                content: editorRef.current?.getJSON()
             }
-        },
-        [setShowPopup]
-    )
+            console.log(dataToBeSentToWix)
+            window.parent.postMessage(dataToBeSentToWix, 'https://wordweft.wixstudio.com/')
+
+            // Update the last save time
+            setLastSaveTime(currentTime)
+
+            // Show popup
+            setShowPopup(true)
+        }
+    }, [setShowPopup, lastSaveTime])
 
     const hidePopup = useCallback(() => {
         setShowPopup(false);
