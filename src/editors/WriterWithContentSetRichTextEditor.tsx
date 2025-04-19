@@ -43,6 +43,10 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
                 console.log("Sending Data to WIX for AutoSave");
                 let dataToBeSentToWix = {
                     eventType : "auto_save",
+                    stats: {
+                        characterCount: editorRef.current.storage.characterCount.characters(),
+                        wordCount: editorRef.current.storage.characterCount.words()
+                    },
                     content : editorRef.current?.getJSON()
                 }
                 window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
@@ -116,6 +120,10 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
         console.log("Posting Message")
         let dataToBeSentToWix = {
             eventType : "final_save",
+            stats: {
+                characterCount: editorRef.current?.storage.characterCount.characters(),
+                wordCount: editorRef.current?.storage.characterCount.words()
+            },
             content : editorRef.current?.getJSON()
         }
         window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
