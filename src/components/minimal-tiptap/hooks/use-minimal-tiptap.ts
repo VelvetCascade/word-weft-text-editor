@@ -7,7 +7,6 @@ import { Typography } from '@tiptap/extension-typography'
 import { Placeholder } from '@tiptap/extension-placeholder'
 import { Underline } from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
-import { FontFamily } from '@tiptap/extension-font-family'
 import {
   Link,
   Image,
@@ -16,6 +15,8 @@ import {
   Selection,
   Color,
   UnsetAllMarks,
+  CustomFontFamily,
+  CustomDetails,
   ResetMarksOnEnter,
   FileHandler
 } from '../extensions'
@@ -23,7 +24,6 @@ import { cn } from '@/lib/utils'
 import { fileToBase64, getOutput, randomId } from '../utils'
 import { useThrottle } from '../hooks/use-throttle'
 import { toast } from 'sonner'
-import Details from "@tiptap-pro/extension-details";
 import DetailsContent from "@tiptap-pro/extension-details-content";
 import DetailsSummary from '@tiptap-pro/extension-details-summary';
 import {Subscript} from "@tiptap/extension-subscript";
@@ -165,7 +165,7 @@ export const createExtensions = (placeholder: string) => [
   HorizontalRule,
   ResetMarksOnEnter,
   CodeBlockLowlight,
-  Details.configure({
+  CustomDetails.configure({
     persist: true,
     HTMLAttributes: {
       class: 'details',
@@ -179,7 +179,7 @@ export const createExtensions = (placeholder: string) => [
   TextAlign.configure({
     types: ['heading', 'paragraph'],
   }),
-  FontFamily.configure({
+  CustomFontFamily.configure({
     types: ['textStyle']
   }),
   Placeholder.configure({ placeholder: () => placeholder })
@@ -218,8 +218,9 @@ export const useMinimalTiptapEditor = ({
     extensions: createExtensions(placeholder),
     editorProps: {
       attributes: {
-        autocomplete: 'off',
-        autocorrect: 'off',
+        spellcheck:"true",
+        autocomplete: "on",
+        autocorrect: "on",
         autocapitalize: 'off',
         class: cn('focus:outline-none', editorClassName)
       }

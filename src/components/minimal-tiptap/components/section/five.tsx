@@ -54,7 +54,7 @@ const standardFormatActions: InsertElement[] = [
     action: editor => editor.chain().focus().setDetails().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().setDetails().run(),
-    shortcuts: ['mod', 'alt', '-']
+    shortcuts: ['mod', 'alt', 'D']
   },
   {
     value: 'undo',
@@ -63,7 +63,7 @@ const standardFormatActions: InsertElement[] = [
     action: editor => editor.chain().focus().undo().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().undo().run(),
-    shortcuts: ['mod', 'alt', '-']
+    shortcuts: ['mod', 'Z']
   },
   {
     value: 'redo',
@@ -72,7 +72,7 @@ const standardFormatActions: InsertElement[] = [
     action: editor => editor.chain().focus().redo().run(),
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().redo().run(),
-    shortcuts: ['mod', 'alt', '-']
+    shortcuts: ['mod', 'Y']
   }
 ]
 
@@ -81,7 +81,7 @@ const scriptFormatActions: InsertElement[] = [
   {
     value: 'subscript',
     label: 'Subscript',
-    icon: <LuSubscript className="size-5 toolbar-text-icon-color" />,
+    icon: <LuSubscript className="size-5 hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().toggleSubscript().run(),
     isActive: editor => editor.isActive('subscript'),
     canExecute: editor => editor.can().chain().focus().toggleSubscript().run(),
@@ -90,7 +90,7 @@ const scriptFormatActions: InsertElement[] = [
   {
     value: 'superscript',
     label: 'Superscript',
-    icon: <LuSuperscript className="size-5 toolbar-text-icon-color" />,
+    icon: <LuSuperscript className="size-5  hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().toggleSuperscript().run(),
     isActive: editor => editor.isActive('superscript'),
     canExecute: editor => editor.can().chain().focus().toggleSuperscript().run(),
@@ -102,7 +102,7 @@ const alignFormatActions: InsertElement[] = [
   {
     value: 'ta-left',
     label: 'Left Align',
-    icon: <CiTextAlignLeft className="size-5 toolbar-text-icon-color" />,
+    icon: <CiTextAlignLeft className="size-5 hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().setTextAlign('left').run(),
     isActive: editor => editor.isActive({ textAlign: 'left' }),
     canExecute: editor => editor.can().chain().focus().setTextAlign('left').run(),
@@ -111,7 +111,7 @@ const alignFormatActions: InsertElement[] = [
   {
     value: 'ta-center',
     label: 'Center Align',
-    icon: <CiTextAlignCenter className="size-5 toolbar-text-icon-color" />,
+    icon: <CiTextAlignCenter className="size-5 hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().setTextAlign('center').run(),
     isActive: editor => editor.isActive({ textAlign: 'center' }),
     canExecute: editor => editor.can().chain().focus().setTextAlign('center').run(),
@@ -120,7 +120,7 @@ const alignFormatActions: InsertElement[] = [
   {
     value: 'ta-right',
     label: 'Right Align',
-    icon: <CiTextAlignRight className="size-5 toolbar-text-icon-color" />,
+    icon: <CiTextAlignRight className="size-5 hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().setTextAlign('right').run(),
     isActive: editor => editor.isActive({ textAlign: 'right' }),
     canExecute: editor => editor.can().chain().focus().setTextAlign('right').run(),
@@ -129,7 +129,7 @@ const alignFormatActions: InsertElement[] = [
   {
     value: 'ta-justify',
     label: 'Justify',
-    icon: <CiTextAlignJustify className="size-5 toolbar-text-icon-color" />,
+    icon: <CiTextAlignJustify className="size-5 hsl(var(--foreground)) hover:hsl(var(--background))" />,
     action: editor => editor.chain().focus().setTextAlign('justify').run(),
     isActive: editor => editor.isActive({ textAlign: 'justify' }),
     canExecute: editor => editor.can().chain().focus().setTextAlign('justify').run(),
