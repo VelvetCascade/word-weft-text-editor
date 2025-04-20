@@ -12,6 +12,7 @@ import TableCell from '@tiptap/extension-table-cell'
 import { Youtube } from '@tiptap/extension-youtube'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import Highlight from '@tiptap/extension-highlight'
 import {
   Link,
   Image,
@@ -177,6 +178,7 @@ export const createExtensions = (placeholder: string) => [
   Youtube.configure({
     modestBranding: true
   }),
+  Highlight.configure({ multicolor: true }),
   CustomDetails.configure({
     persist: true,
     HTMLAttributes: {
