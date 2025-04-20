@@ -126,7 +126,7 @@ const COLORS: ColorPalette[] = [
     label: 'Palette 1',
     inverse: 'hsl(var(--background))',
     colors: [
-      { cssVar: 'black', label: 'Default' },
+      { cssVar: 'hsl(var(--foreground))', label: 'Default' },
       { cssVar: 'var(--mt-accent-bold-blue)', label: 'Bold blue' },
       { cssVar: 'var(--mt-accent-bold-teal)', label: 'Bold teal' },
       { cssVar: 'var(--mt-accent-bold-green)', label: 'Bold green' },
@@ -152,7 +152,7 @@ const COLORS: ColorPalette[] = [
     label: 'Palette 3',
     inverse: 'hsl(var(--foreground))',
     colors: [
-      { cssVar: 'yellow', label: 'Yellow', darkLabel: 'Yellow' },
+      { cssVar: 'black', label: 'Black', darkLabel: 'Black' },
       { cssVar: 'var(--mt-accent-blue-subtler)', label: 'Blue subtle' },
       { cssVar: 'var(--mt-accent-teal-subtler)', label: 'Teal subtle' },
       { cssVar: 'var(--mt-accent-green-subtler)', label: 'Green subtle' },
@@ -358,7 +358,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
               size={size}
               variant={variant}
             >
-              <span className="mr-2 flex-grow text-center">{currentTextStyle?.label || 'Normal Text'}</span>
+              <span className="mr-1 ml-1 flex-grow text-center">{currentTextStyle?.label || 'Normal Text'}</span>
               <CaretDownIcon className="size-5" />
             </ToolbarButton>
           </DropdownMenuTrigger>
@@ -381,7 +381,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
               variant={variant}
             >
   <span
-    className="mr-2 flex-grow text-center"
+    className="mr-1 ml-1 flex-grow text-center"
     style={{
       fontFamily: editor.isActive('textStyle', { fontFamily: currentFontFamily.fontFamily }) ?
         currentFontFamily.fontFamily : ''
