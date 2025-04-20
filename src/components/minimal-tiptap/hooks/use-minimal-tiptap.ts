@@ -8,6 +8,10 @@ import { Placeholder } from '@tiptap/extension-placeholder'
 import { Underline } from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { FontFamily } from '@tiptap/extension-font-family'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import {
   Link,
   Image,
@@ -55,6 +59,10 @@ export const createExtensions = (placeholder: string) => [
   }),
   Link,
   Underline,
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
   Image.configure({
     allowedMimeTypes: ['image/*'],
     maxFileSize: 5 * 1024 * 1024,
