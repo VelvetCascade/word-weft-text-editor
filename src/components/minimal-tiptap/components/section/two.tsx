@@ -8,11 +8,11 @@ import {
   DotsHorizontalIcon,
   FontBoldIcon,
   FontItalicIcon,
-  TextNoneIcon,
   UnderlineIcon
 } from '@radix-ui/react-icons'
 import { ToolbarSection } from '../toolbar-section'
 import {MdStrikethroughS} from "react-icons/md";
+import { GoCircleSlash } from "react-icons/go";
 
 type TextStyleAction = 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code' | 'clearFormatting'
 
@@ -49,6 +49,15 @@ const formatActions: TextStyle[] = [
     shortcuts: ['mod', 'U']
   },
   {
+    value: 'clearFormatting',
+    label: 'Clear formatting',
+    icon: <GoCircleSlash className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().unsetAllMarks().run(),
+    isActive: () => false,
+    canExecute: editor => editor.can().chain().focus().unsetAllMarks().run() && !editor.isActive('codeBlock'),
+    shortcuts: ['mod', '\\']
+  },
+  {
     value: 'strikethrough',
     label: 'Strikethrough',
     icon: <MdStrikethroughS className="size-5 toolbar-text-icon-color" />,
@@ -65,15 +74,6 @@ const formatActions: TextStyle[] = [
     isActive: editor => editor.isActive('code'),
     canExecute: editor => editor.can().chain().focus().toggleCode().run() && !editor.isActive('codeBlock'),
     shortcuts: ['mod', 'E']
-  },
-  {
-    value: 'clearFormatting',
-    label: 'Clear formatting',
-    icon: <TextNoneIcon className="size-5 toolbar-text-icon-color" />,
-    action: editor => editor.chain().focus().unsetAllMarks().run(),
-    isActive: () => false,
-    canExecute: editor => editor.can().chain().focus().unsetAllMarks().run() && !editor.isActive('codeBlock'),
-    shortcuts: ['mod', '\\']
   }
 ]
 

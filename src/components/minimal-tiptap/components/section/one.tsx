@@ -13,6 +13,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useTheme } from '../../hooks/use-theme'
+import { HighlighterPopover } from '@/components/minimal-tiptap/components/highlighter.tsx'
+
 
 interface TextStyle extends Omit<FormatAction, 'value' | 'icon' | 'action' | 'isActive' | 'canExecute'> {
   element: keyof React.JSX.IntrinsicElements
@@ -400,7 +402,7 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
         {/* Color Picker */}
         <Popover>
           <PopoverTrigger asChild>
-            <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-12" size={size} variant={variant}>
+            <ToolbarButton tooltip="Text color" aria-label="Text color" className="w-7" size={size} variant={variant}>
               <div
                 className="flex items-center justify-center size-6 rounded border border-gray-300"
                 style={{ backgroundColor: '#EED7BF' }}
@@ -439,6 +441,8 @@ export const SectionOne: React.FC<SectionOneProps> = React.memo(
             </div>
           </PopoverContent>
         </Popover>
+
+        <HighlighterPopover editor={editor} size={size} variant={variant} />
       </div>
     )
   }
