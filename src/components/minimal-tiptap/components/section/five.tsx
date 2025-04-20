@@ -12,6 +12,7 @@ import { CiTextAlignCenter, CiTextAlignJustify, CiTextAlignLeft, CiTextAlignRigh
 import { IoIosRedo, IoIosUndo } from "react-icons/io"
 import { ToolbarButton } from '../toolbar-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import Emoji from '@/components/minimal-tiptap/components/Emoji/emoji.tsx'
 
 type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript' | 'ta-left' |'ta-center'|'ta-right' | 'ta-justify' | 'undo'| 'redo'
 interface InsertElement extends FormatAction {
@@ -238,6 +239,8 @@ export const SectionFive: React.FC<SectionFiveProps> = ({
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <Emoji editor={editor}/>
 
       {/* Standard Toolbar Section with remaining items */}
       <ToolbarSection

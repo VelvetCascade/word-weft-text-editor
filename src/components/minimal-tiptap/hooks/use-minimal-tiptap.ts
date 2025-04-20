@@ -13,6 +13,7 @@ import { Youtube } from '@tiptap/extension-youtube'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import Highlight from '@tiptap/extension-highlight'
+import Emoji from '@tiptap-pro/extension-emoji'
 import {
   Link,
   Image,
@@ -175,6 +176,7 @@ export const createExtensions = (placeholder: string) => [
   HorizontalRule,
   ResetMarksOnEnter,
   CodeBlockLowlight,
+  Emoji,
   Youtube.configure({
     modestBranding: true
   }),
