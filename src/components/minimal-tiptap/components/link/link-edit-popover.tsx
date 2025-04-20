@@ -3,7 +3,7 @@ import type { Editor } from '@tiptap/react'
 import type { VariantProps } from 'class-variance-authority'
 import type { toggleVariants } from '@/components/ui/toggle'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Link2Icon } from '@radix-ui/react-icons'
+import { FaYoutube } from "react-icons/fa";
 import { ToolbarButton } from '../toolbar-button'
 import { LinkEditBlock } from './link-edit-block'
 
@@ -18,28 +18,25 @@ const LinkEditPopover = ({ editor, size, variant }: LinkEditPopoverProps) => {
   const text = editor.state.doc.textBetween(from, to, ' ')
 
   const onSetLink = React.useCallback(
-    (url: string, text?: string, openInNewTab?: boolean) => {
-      editor
-        .chain()
-        .focus()
-        .extendMarkRange('link')
-        .insertContent({
-          type: 'text',
-          text: text || url,
-          marks: [
-            {
-              type: 'link',
-              attrs: {
-                href: url,
-                target: openInNewTab ? '_blank' : ''
-              }
-            }
-          ]
-        })
-        .setLink({ href: url })
-        .run()
+    (url: string) => {
 
-      editor.commands.enter()
+      const validateUrl = (url: string): boolean => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+        const match = url.match(regExp)
+        console.log(match)
+        console.log(!!(match && match[2].length === 11))
+        return !!(match && match[2].length === 11);
+      }
+      if (validateUrl(url)) {
+        editor.commands.setYoutubeVideo({
+          src: url,
+          width: 640,
+          height: 480
+        })
+
+        editor.commands.enter()
+        setOpen(false)
+      }
     },
     [editor]
   )
@@ -49,13 +46,13 @@ const LinkEditPopover = ({ editor, size, variant }: LinkEditPopoverProps) => {
       <PopoverTrigger asChild>
         <ToolbarButton
           isActive={editor.isActive('link')}
-          tooltip="Link"
+          tooltip="Youtube"
           aria-label="Insert link"
           disabled={editor.isActive('codeBlock')}
           size={size}
           variant={variant}
         >
-          <Link2Icon className="size-5 toolbar-text-icon-color" />
+          <FaYoutube className="size-5 toolbar-text-icon-color" />
         </ToolbarButton>
       </PopoverTrigger>
       <PopoverContent className="w-full min-w-80" align="end" side="bottom">

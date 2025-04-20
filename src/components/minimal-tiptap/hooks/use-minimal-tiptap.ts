@@ -9,6 +9,7 @@ import { Underline } from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
+import { Youtube } from '@tiptap/extension-youtube'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import {
@@ -173,6 +174,9 @@ export const createExtensions = (placeholder: string) => [
   HorizontalRule,
   ResetMarksOnEnter,
   CodeBlockLowlight,
+  Youtube.configure({
+    modestBranding: true
+  }),
   CustomDetails.configure({
     persist: true,
     HTMLAttributes: {
