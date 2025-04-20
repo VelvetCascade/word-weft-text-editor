@@ -45,28 +45,6 @@ export const WriterRichTextEditor: React.FC = () => {
     [form]
   )
 
-  // const handleChange = useCallback(
-  //     () => {
-  //         if (1 === Math.floor(Math.random() * 30) && editorRef.current != null) {
-  //             console.log("Sending Data to WIX Fir AutoSave");
-  //             let dataToBeSentToWix = {
-  //                 eventType : "auto_save",
-  //                 stats: {
-  //                     characterCount: editorRef.current.storage.characterCount.characters(),
-  //                     wordCount: editorRef.current.storage.characterCount.words()
-  //                 },
-  //                 content : editorRef.current?.getJSON()
-  //             }
-  //             console.log(dataToBeSentToWix)
-  //             window.parent.postMessage(dataToBeSentToWix, "https://wordweft.wixstudio.com/");
-  //
-  //             // Show popup
-  //             setShowPopup(true);
-  //         }
-  //     },
-  //     [setShowPopup]
-  // )
-
   const handleChange = useCallback(() => {
     const currentTime = Date.now()
 
