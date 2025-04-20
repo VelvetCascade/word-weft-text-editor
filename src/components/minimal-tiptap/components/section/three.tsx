@@ -28,8 +28,8 @@ interface TableAction {
 const tableActions: TableAction[] = [
   {
     label: 'Insert table',
-    action: (editor) => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(),
-    icon: <TableIcon className="mr-2 size-4" />,
+    action: (editor) => editor.chain().focus().insertTable({ rows: 2, cols: 1, withHeaderRow: true }).run(),
+    icon: <TableIcon className="ml-1 mr-2 size-4" />,
     shortcuts: ['mod', 'shift', 'T']
   },
   {
@@ -191,7 +191,7 @@ export const SectionTable: React.FC<SectionTableProps> = React.memo(
               size={size}
               variant={variant}
             >
-              <TableIcon className="mr-2 size-5" />
+              <TableIcon className="ml-1 mr-2 size-5" />
               <span className="mr-2">Table</span>
               <CaretDownIcon className="size-5" />
             </ToolbarButton>
