@@ -195,7 +195,7 @@ export const createExtensions = (placeholder: string) => [
   Superscript,
   CharacterCount,
   TextAlign.configure({
-    types: ['heading', 'paragraph'],
+    types: ['heading', 'paragraph', 'spoiler'],
   }),
   CustomFontFamily.configure({
     types: ['textStyle']

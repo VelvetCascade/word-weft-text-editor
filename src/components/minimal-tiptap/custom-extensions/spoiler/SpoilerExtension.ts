@@ -1,7 +1,6 @@
 import {mergeAttributes, Node} from '@tiptap/core'
 import {ReactNodeViewRenderer} from '@tiptap/react'
-
-import Component from './SpoilerComponent.jsx'
+import Component from "@/components/minimal-tiptap/custom-extensions/spoiler/SpoilerComponent.tsx";
 export interface SpoilerOptions {
     /**
      * Custom HTML attributes that should be added to the rendered HTML tag.

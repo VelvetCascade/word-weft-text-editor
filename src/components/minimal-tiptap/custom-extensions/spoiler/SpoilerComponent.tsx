@@ -2,12 +2,14 @@ import {NodeViewContent, NodeViewWrapper} from '@tiptap/react'
 import React from 'react'
 import ReactSpoiler from "react-spoiler";
 
-export default props => {
+const Component: React.FC = (props) => {
     return (
-        <NodeViewWrapper>
+        <NodeViewWrapper style={{ textAlign: props.node.attrs.textAlign }}>
             <ReactSpoiler blur={10}>
                 <NodeViewContent className="content is-editable" />
             </ReactSpoiler>
         </NodeViewWrapper>
     )
 }
+
+export default Component;
