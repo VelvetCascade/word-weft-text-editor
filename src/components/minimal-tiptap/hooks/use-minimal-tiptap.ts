@@ -37,6 +37,7 @@ import {Subscript} from "@tiptap/extension-subscript";
 import {Superscript} from "@tiptap/extension-superscript";
 import {CharacterCount} from "@tiptap/extension-character-count";
 import {TextAlign} from "@tiptap/extension-text-align";
+import {SpoilerCustomExtension} from "@/components/minimal-tiptap/custom-extensions/spoiler/SpoilerExtension.ts";
 
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
   value?: Content
@@ -198,7 +199,8 @@ export const createExtensions = (placeholder: string) => [
   CustomFontFamily.configure({
     types: ['textStyle']
   }),
-  Placeholder.configure({ placeholder: () => placeholder })
+  Placeholder.configure({ placeholder: () => placeholder }),
+  SpoilerCustomExtension
 ]
 
 export const useMinimalTiptapEditor = ({

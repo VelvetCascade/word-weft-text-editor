@@ -35,7 +35,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <SectionTwo
         editor={editor}
-        activeActions={['bold', 'italic', 'underline', 'clearFormatting', 'strikethrough']}
+        activeActions={['bold', 'italic', 'underline', 'strikethrough', 'clearFormatting' ]}
         mainActionCount={5}
       />
 
@@ -49,7 +49,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => (
 
       <Separator orientation="vertical" className="mx-2 h-7" />
 
-      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details', 'superscript', 'subscript', 'ta-left' ,'ta-center','ta-right' , 'ta-justify', 'undo', 'redo']} mainActionCount={10} />
+      <SectionFive editor={editor} activeActions={['codeBlock', 'blockquote', 'horizontalRule','details', 'superscript', 'subscript', 'ta-left' ,'ta-center','ta-right' , 'ta-justify', 'undo', 'redo', 'spoiler']} mainActionCount={10} />
     </div>
   </div>
 )
