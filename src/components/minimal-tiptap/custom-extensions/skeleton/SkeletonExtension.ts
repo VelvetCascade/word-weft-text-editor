@@ -1,8 +1,7 @@
 import {mergeAttributes, Node} from '@tiptap/core'
 import {ReactNodeViewRenderer} from '@tiptap/react'
-
-import Component from './SpoilerComponent.jsx'
-export interface SpoilerOptions {
+import SkeletonNode from "@/components/minimal-tiptap/custom-extensions/skeleton/Skeleton.tsx";
+export interface SkeletonOptions {
     /**
      * Custom HTML attributes that should be added to the rendered HTML tag.
      * @default {}
@@ -13,22 +12,22 @@ export interface SpoilerOptions {
 
 declare module '@tiptap/core' {
     interface Commands<ReturnType> {
-        spoiler: {
-            setSpoiler: () => ReturnType,
+        skeleton: {
+            setSkeleton: () => ReturnType,
             /**
              * Toggle a bold mark
              */
-            toggleSpoiler: () => ReturnType,
+            toggleSkeleton: () => ReturnType,
             /**
              * Unset a bold mark
              */
-            unsetSpoiler: () => ReturnType,
+            unsetSkeleton: () => ReturnType,
         }
     }
 }
 
-export const SpoilerCustomExtension = Node.create<SpoilerOptions>({
-    name: 'spoiler',
+export const SkeletonCustomExtension = Node.create<SkeletonOptions>({
+    name: 'skeleton',
 
     group: 'block',
 
@@ -37,32 +36,32 @@ export const SpoilerCustomExtension = Node.create<SpoilerOptions>({
     parseHTML() {
         return [
             {
-                tag: 'spoiler',
+                tag: 'skeleton',
             },
         ]
     },
 
     renderHTML({HTMLAttributes}) {
-        return ['spoiler']
+        return ['skeleton', mergeAttributes(HTMLAttributes)]
     },
 
     addCommands() {
         return {
-            setSpoiler:
+            setSkeleton:
                 attributes => ({commands}) => {
                     return commands.setNode(this.name, attributes)
                 },
-            toggleSpoiler:
+            toggleSkeleton:
                 attributes => ({commands}) => {
                     return commands.toggleNode(this.name, 'paragraph', attributes)
                 },
-            unsetSpoiler: (attributes) => ({ commands }) => {
+            unsetSkeleton: (attributes) => ({ commands }) => {
                 return commands.setNode('paragraph', attributes)
             },
         }
     },
 
     addNodeView() {
-        return ReactNodeViewRenderer(Component)
+        return ReactNodeViewRenderer(SkeletonNode)
     },
 })
