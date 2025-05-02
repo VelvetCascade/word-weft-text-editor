@@ -28,13 +28,7 @@ export const WriterWithContentSetRichTextEditor: React.FC = () => {
         "type": "doc",
         "content": [
             {
-                "type": "paragraph",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "Waiting for content from Wix..."
-                    }
-                ]
+                "type": "skeleton"
             }
         ]
     });

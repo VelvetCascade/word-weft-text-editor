@@ -13,8 +13,9 @@ import { IoIosRedo, IoIosUndo } from "react-icons/io"
 import { ToolbarButton } from '../toolbar-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Emoji from '@/components/minimal-tiptap/components/Emoji/emoji.tsx'
+import {IoEyeOff} from "react-icons/io5";
 
-type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript' | 'ta-left' |'ta-center'|'ta-right' | 'ta-justify' | 'undo'| 'redo'
+type InsertElementAction = 'codeBlock' | 'blockquote' | 'horizontalRule' | 'details' | 'subscript' | 'superscript' | 'ta-left' |'ta-center'|'ta-right' | 'ta-justify' | 'undo'| 'redo' | 'spoiler'
 interface InsertElement extends FormatAction {
   value: InsertElementAction
 }
@@ -56,6 +57,15 @@ const standardFormatActions: InsertElement[] = [
     isActive: () => false,
     canExecute: editor => editor.can().chain().focus().setDetails().run(),
     shortcuts: ['mod', 'alt', 'D']
+  },
+  {
+    value: 'spoiler',
+    label: 'Spoiler',
+    icon: <IoEyeOff className="size-5 toolbar-text-icon-color" />,
+    action: editor => editor.chain().focus().toggleSpoiler().run(),
+    isActive: editor => editor.isActive('spoiler'),
+    canExecute: editor => editor.can().chain().focus().toggleSpoiler().run(),
+    shortcuts: ['mod', 'alt', 'S']
   },
   {
     value: 'undo',

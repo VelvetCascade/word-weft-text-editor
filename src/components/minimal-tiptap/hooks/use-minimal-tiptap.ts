@@ -37,6 +37,8 @@ import {Subscript} from "@tiptap/extension-subscript";
 import {Superscript} from "@tiptap/extension-superscript";
 import {CharacterCount} from "@tiptap/extension-character-count";
 import {TextAlign} from "@tiptap/extension-text-align";
+import {SpoilerCustomExtension} from "@/components/minimal-tiptap/custom-extensions/spoiler/SpoilerExtension.ts";
+import {SkeletonCustomExtension} from "@/components/minimal-tiptap/custom-extensions/skeleton/SkeletonExtension.ts";
 
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
   value?: Content
@@ -193,12 +195,14 @@ export const createExtensions = (placeholder: string) => [
   Superscript,
   CharacterCount,
   TextAlign.configure({
-    types: ['heading', 'paragraph'],
+    types: ['heading', 'paragraph', 'spoiler'],
   }),
   CustomFontFamily.configure({
     types: ['textStyle']
   }),
-  Placeholder.configure({ placeholder: () => placeholder })
+  Placeholder.configure({ placeholder: () => placeholder }),
+  SpoilerCustomExtension,
+  SkeletonCustomExtension
 ]
 
 export const useMinimalTiptapEditor = ({
